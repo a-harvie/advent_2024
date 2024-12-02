@@ -1,22 +1,28 @@
 import gleam/int
+
 // import gleam/io
 import gleam/list
 import gleam/string
 
 pub fn main() {
   part_one(input())
+  part_two(input())
 }
 
 pub fn part_one(input: String) -> Int {
   let input_tuples = input_tuples(input)
   // io.debug(input_list)
-  list.fold(
-    input_tuples,
-    0,
-    fn(accumulator, inputs) {
-      accumulator + int.absolute_value(inputs.0 - inputs.1)
-    },
-  )
+  list.fold(input_tuples, 0, fn(accumulator, inputs) {
+    accumulator + int.absolute_value(inputs.0 - inputs.1)
+  })
+}
+
+pub fn part_two(input: String) -> Int {
+  let input_lists = input_lists(input)
+  // io.debug(input_lists)
+  list.fold(input_lists.0, 0, fn(accumulator, a) {
+    accumulator + a * list.count(input_lists.1, fn(b) { a == b })
+  })
 }
 
 fn input_tuples(input: String) -> List(#(Int, Int)) {
@@ -31,13 +37,10 @@ fn input_lists(input: String) -> #(List(Int), List(Int)) {
   // TODO: this can be done more cleanly either recursively slicing the first elements off the sub-lists
   // or with fold?
   let first_items =
-    list.map(
-      parsed_input,
-      fn(l) {
-        let assert Ok(first) = list.first(l)
-        first
-      },
-    )
+    list.map(parsed_input, fn(l) {
+      let assert Ok(first) = list.first(l)
+      first
+    })
     |> list.sort(int.compare)
   // io.debug(first_items)
 
@@ -46,13 +49,10 @@ fn input_lists(input: String) -> #(List(Int), List(Int)) {
   // io.debug(first_items_2)
 
   let second_items =
-    list.map(
-      parsed_input,
-      fn(l) {
-        let assert Ok(last) = list.last(l)
-        last
-      },
-    )
+    list.map(parsed_input, fn(l) {
+      let assert Ok(last) = list.last(l)
+      last
+    })
     |> list.sort(int.compare)
   // io.debug(second_items)
 
@@ -66,13 +66,10 @@ fn parse_input(input: String) -> List(List(Int)) {
   |> list.map(fn(l) { string.split(l, " ") })
   |> list.map(fn(l) { list.filter(l, fn(s) { !string.is_empty(s) }) })
   |> list.map(fn(l) {
-    list.map(
-      l,
-      fn(s) {
-        let assert Ok(i) = int.parse(s)
-        i
-      },
-    )
+    list.map(l, fn(s) {
+      let assert Ok(i) = int.parse(s)
+      i
+    })
   })
 }
 
