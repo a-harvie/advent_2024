@@ -1,5 +1,6 @@
 import days/day_01
 import days/day_02
+import days/day_03
 import gleeunit
 import gleeunit/should
 
@@ -49,4 +50,22 @@ pub fn day_two_part_one_test() {
 pub fn day_two_part_two_test() {
   day_02.part_two(day_two_test_input())
   |> should.equal(4)
+}
+
+pub fn day_three_part_one_test_input() -> String {
+  "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+}
+
+pub fn day_three_part_one_test() {
+  day_03.part_one(day_three_part_one_test_input())
+  |> should.equal(161)
+}
+
+pub fn day_three_part_two_test_input() -> String {
+  "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+}
+
+pub fn day_three_part_two_test() {
+  day_03.part_two(day_three_part_two_test_input())
+  |> should.equal(48)
 }
