@@ -1,6 +1,7 @@
 import days/day_01
 import days/day_02
 import days/day_03
+import days/day_04
 import gleeunit
 import gleeunit/should
 
@@ -68,4 +69,22 @@ pub fn day_three_part_two_test_input() -> String {
 pub fn day_three_part_two_test() {
   day_03.part_two(day_three_part_two_test_input())
   |> should.equal(48)
+}
+
+pub fn day_four_test_input() -> String {
+  "MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX"
+}
+
+pub fn day_four_part_one_test() {
+  day_04.part_one(day_four_test_input())
+  |> should.equal(18)
 }
